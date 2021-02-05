@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bar chart draft</title>
+
+    <link href="js/c3.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/d3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/c3.min.js"></script>
+
+    <style>
+
+        .container {
+            max-width:750px;
+            margin: 0 auto;
+            font-family: Helvetica;
+            line-height: 1.4em;
+        }
+
+
+    .chart1 {
+    max-width: 90%;
+    margin: 0 auto;
+    padding-bottom: 25px;
+    margin-bottom: 50%;
+    }
+
+    #chart1 .c3-axis-y text {
+      font-size: 8px;
+    }
+
+    #chart1 .c3-axis-x text {
+      font-size: 9px;
+    }
+
+        H1 {
+            text-align:center;
+        }
+
+        .chart_title {
+            margin-top: 30px;
+            margin-bottom: -15px;
+        }
+        .chart_sub_title {
+            font-size: 0.9em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* .c3-axis-x > path.domain, .tick > line[x2="-6"] {
+          visibility: hidden;
+        } */
+
+        .c3 svg {
+          font: 16px sans-serif;
+        }
+
+        h4 {
+          font-size: 0.7em;
+          font-style: italic;
+          color: grey;
+          margin-top: -1px;
+          margin-bottom: 30px;
+          padding-bottom: 30px;
+          line-height: 1.1em;
+          /* padding-top: 10px;
+          padding-bottom: 10px; */
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+
+
+
+      <h2 align="left" class="chart_title">Confirmed Number of Vaccine Doses Purchased by Country Income Level</h2>
+      <p align="left" class="chart_sub_title">Source: <a href="https://launchandscalefaster.org/COVID-19#Interactive%20tables%20and%20charts%20-%20COVID-19%20Vaccine%20Advance%20Market%20Commitments" target="_blank">Duke Global Health Innovation Center</a>. Data from Jan 30 2021</p>
+
+     <!-- < ! - -User location bar chart- - ! > -->
+       <div class="chart" align="center" id="chart1">
+         <script type="text/javascript">
+    var chart = c3.generate({
+         bindto: '#chart1',
+
+         size: {
+           height: 350,
+         },
+         bar: {
+                 width: 37,
+             },
+         data: {
+             x: 'Income level classification',
+             columns: [
+                 ['Income level classification', 'High income countries', 'Upper middle income countries', 'Lower middle income countries','Low income countries','Covax'],
+                 ['Number of vaccine doses procured', 4202570000, 1178300075, 523600000, 670000000, 1110000000]
+             ],
+             type: 'bar',
+             color: function(inColor, data) {
+                        var colors = [ '#222c51', '#015190', '#51A4D0','#0067A2','#7E7E7E'];
+                        if(data.index !== undefined) {
+                            return colors[data.index];
+                        }
+
+                        return inColor;
+                    }
+         },
+
+         tooltip: {
+                              format: {
+                                value: function(value) {
+                                  return d3.format(",")(value)
+                                }
+                              }
+                            },
+
+
+         legend: {
+             show: false
+         },
+         axis: {
+             rotated: false,
+             x: {
+                 type: 'category',
+                 tick: {
+                   outer: false
+                 }
+               },
+             y : {
+                 tick: {
+                   format:d3.format(","),
+                         outer: false
+                         }
+                      }
+                  },
+         grid: {
+           y: {
+      show: true
+           }
+               }
+     });
+ </script>
+ <h4 align="left">*Covax is a global multilateral intiative, co-led by GAVI, WHO and CEPI, for speeding up the development, manufacture and equitable distribution fo Covid-19 vaccines.</h4>
+   </div>
+
+
+</body>
+
+</html>
